@@ -15,7 +15,7 @@ CREATE TABLE `emails` (
   `email` varchar(255) NOT NULL DEFAULT '',
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE `urls` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -24,7 +24,7 @@ CREATE TABLE `urls` (
   `visited` tinyint(1) NOT NULL DEFAULT '0',
   `email_visited` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=79114 DEFAULT CHARSET=utf8;
+);
 ```
 ## Usage
 1. Navigate to index.php
