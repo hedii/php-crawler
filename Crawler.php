@@ -1,6 +1,8 @@
 <?php
 error_reporting(E_ALL); 
 ini_set('display_errors', 1);
+set_time_limit(86400); // 24 hours
+ignore_user_abort(true);
 
 require_once ('MysqliDb.php');
 
