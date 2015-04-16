@@ -1,5 +1,6 @@
 # php-crawler
 A crawler written in php: find email addresses on the internets
+See it in action here (video): https://www.youtube.com/watch?v=rWsb6E_335U
 
 ## Installation
 1. Put this all files on your server
