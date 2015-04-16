@@ -22,7 +22,7 @@
 	<script>
 		setInterval(function(){
 			window.scrollTo(0, document.body.scrollHeight);
-		},100);
+		},1000);
 	</script>
 	
 </head>
