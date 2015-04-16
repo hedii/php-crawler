@@ -573,7 +573,7 @@ class Crawler {
 	 * get_total_url function.
 	 * 
 	 * @access public
-	 * @return int
+	 * @return float
 	 */
 	public function get_total_url() {
 		
@@ -585,7 +585,7 @@ class Crawler {
 	 * get_visited_url function.
 	 * 
 	 * @access public
-	 * @return int
+	 * @return float
 	 */
 	public function get_visited_url() {
 		
@@ -597,7 +597,7 @@ class Crawler {
 	 * get_total_email function.
 	 * 
 	 * @access public
-	 * @return int
+	 * @return float
 	 */
 	public function get_total_email() {
 		
@@ -609,7 +609,7 @@ class Crawler {
 	 * get_crawled_for_email_url function.
 	 * 
 	 * @access public
-	 * @return int
+	 * @return float
 	 */
 	public function get_crawled_for_email_url() {
 		
