@@ -30,7 +30,7 @@
 
 	<div class="counter">
 		<h4>Statistics</h4>
-		<div id="total_email">total email founded:</div>
+		<div id="total_email">total email found:</div>
 		<div id="total_url">total url stored:</div>
 		<div id="visited_url">visited url:</div>
 		<div id="not_visited_url">not visited url:</div>
@@ -72,7 +72,7 @@
 				type: 'GET',
 				success: function(data) {
 					var total_email = data;
-					$('#total_email').html('total email founded: ' + total_email);
+					$('#total_email').html('total email found: ' + total_email);
 				}
 			});
 			
