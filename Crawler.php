@@ -569,24 +569,48 @@ class Crawler {
 		
 	}
 	
+	/**
+	 * get_total_url function.
+	 * 
+	 * @access public
+	 * @return int
+	 */
 	public function get_total_url() {
 		
 		return $this->db->rawQuery('SELECT COUNT(id) FROM urls')[0]['COUNT(id)'];
 	
 	}
 	
+	/**
+	 * get_visited_url function.
+	 * 
+	 * @access public
+	 * @return int
+	 */
 	public function get_visited_url() {
 		
 		return $this->db->rawQuery('SELECT COUNT(id) FROM urls WHERE visited=1')[0]['COUNT(id)'];
 	
 	}
 	
+	/**
+	 * get_total_email function.
+	 * 
+	 * @access public
+	 * @return int
+	 */
 	public function get_total_email() {
 		
 		return $this->db->rawQuery('SELECT COUNT(id) FROM emails')[0]['COUNT(id)'];
 	
 	}
 	
+	/**
+	 * get_crawled_for_email_url function.
+	 * 
+	 * @access public
+	 * @return int
+	 */
 	public function get_crawled_for_email_url() {
 		
 		return $this->db->rawQuery('SELECT COUNT(id) FROM urls WHERE email_visited=1')[0]['COUNT(id)'];
