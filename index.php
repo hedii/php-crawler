@@ -68,7 +68,7 @@
 			window.scrollTo(0, document.body.scrollHeight);
 			
 			$.ajax({
-				url: '/datas/total_email.php',
+				url: 'datas/total_email.php',
 				type: 'GET',
 				success: function(data) {
 					var total_email = data;
@@ -77,14 +77,14 @@
 			});
 			
 			$.ajax({
-				url: '/datas/total_url.php',
+				url: 'datas/total_url.php',
 				type: 'GET',
 				success: function(data) {
 					var total_url = data;
 					$('#total_url').html('total url stored: ' + total_url);
 					
 					$.ajax({
-						url: '/datas/visited_url.php',
+						url: 'datas/visited_url.php',
 						type: 'GET',
 						success: function(data) {
 							var visited_url = data;
@@ -106,7 +106,7 @@
 					});
 					
 					$.ajax({
-						url: '/datas/crawled_for_email_url.php',
+						url: 'datas/crawled_for_email_url.php',
 						type: 'GET',
 						success: function(data) {
 							var crawled_for_email_url = data;
@@ -131,7 +131,7 @@
 			});
 			
 			$.ajax({
-				url: '/datas/system_load.php',
+				url: 'datas/system_load.php',
 				type: 'GET',
 				success: function(data) {
 					$('#system_load').html('system load: ' + data);
