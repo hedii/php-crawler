@@ -33,3 +33,8 @@ CREATE TABLE `urls` (
 The crawler will then visite all unvisited url that are in the database, and do the same search for other urls.
 3. Navigate to emails.php. The crawler will now start to search for email addresses in urls that are in the database.
 4. If you want a list of all the emails, just export your database table 'emails', and do whatever you want with it.
+
+## Todo
+- Add an option for domain specific crawl
+- Crawl for other things than emails
+- ...
