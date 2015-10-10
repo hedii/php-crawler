@@ -7,6 +7,7 @@ See it in action here (video): https://www.youtube.com/watch?v=rWsb6E_335U
 2. Create a mysql database
 3. Create database tables using the SQL code below
 4. Open Crawler.php and edit the __construct function with your database connection infos
+5. If your are running php-crawler on a windows system, remove everything on /data/system_load.php
 
 #### Database tables creation
 Open a SQL terminal, paste this and execute:
