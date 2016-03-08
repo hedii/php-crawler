@@ -19,15 +19,15 @@
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	
+	<!--
 	<script>
 		setInterval(function(){
 			window.scrollTo(0, document.body.scrollHeight);
 		},1000);
 	</script>
-	
+	-->
 </head>
 <body>
-
 	<header id="site-header">
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">

@@ -1,5 +1,6 @@
 body {
-	padding-top: 290px;
+	margin-top: 450px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .text-green {
@@ -20,4 +21,16 @@ body {
 	z-index: 9999;
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+.statistic {
+	text-align: right;
+}
+
+.counter tr:hover {
+	background: #1583ff;
+}
+
+.counter tr td {
+	padding: 1px 5px 1px 5px;
 }

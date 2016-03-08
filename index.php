@@ -22,23 +22,50 @@
 	<!-- js -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/script.js"></script>
+	<script src="js/script.js"></script>	
 	
+	<!-- font -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 </head>
+
 <body>
-
-
 	<div class="counter">
 		<h4>Statistics</h4>
-		<div id="total_email">total email found:</div>
-		<div id="total_url">total url stored:</div>
-		<div id="visited_url">visited url:</div>
-		<div id="not_visited_url">not visited url:</div>
-		<div id="crawled_for_email_url">url crawled for emails:</div>
-		<div id="not_crawled_for_email_url">url not crawled for emails yet:</div>
-		<div id="system_load">system load:</div>
+		<table>
+			<tbody>
+				<tr>
+					<td>Total emails found: </td>
+					<td><div id="total_email" class="statistic">0</div></td>
+				</tr>
+				<tr>
+					<td>Total URLs stored: </td>
+					<td><div id="total_url" class="statistic">0</div></td>
+				</tr>			
+				<tr>
+					<td>Visited URLs: </td>
+					<td><div id="visited_url" class="statistic">0</div></td>
+				</tr>
+				<tr>
+					<td>Not visited URLs: </td>
+					<td><div id="not_visited_url" class="statistic">0</div></td>
+				</tr>
+				<tr>
+					<td>Crawled URLs for emails: </td>
+					<td><div id="crawled_for_email_url" class="statistic">0</div></td>
+				</tr>
+				<tr>
+					<td>Not yet crawled URLs for emails: </td>
+					<td><div id="not_crawled_for_email_url" class="statistic">0</div></td>
+				</tr>
+				<tr>
+					<td>Average system load: </td>
+					<td><div id="system_load" class="statistic">0</div></td>
+				</tr>				
+			</tbody>
+		</table>
+		<br />
 		
-		<h4>Total urls</h4>
+		<h4>Total URLs</h4>
 		<div class="progress">
 			<div id="progress_visited_url" class="progress-bar progress-bar-success" style="width: 0%">
 				<span id="visited_url_percent">visited</span>
@@ -48,7 +75,7 @@
 			</div>
 		</div>
 		
-		<h4>Urls crawled for emails</h4>
+		<h4>URLs crawled for emails</h4>
 		<div class="progress">
 			<div id="progress_crawled_for_email_url" class="progress-bar progress-bar-success" style="width: 0%">
 				<span id="crawled_for_email_url_percent">crawled for email</span>
@@ -56,23 +83,20 @@
 			<div id="progress_non_crawled_for_email_url" class="progress-bar progress-bar-danger" style="width: 0%">
 				<span id="not_crawled_for_email_url_percent">non-crawled for email</span>
 			</div>
-		</div>
-		
+		</div>		
 	</div>
 
-	
 	<script>
-		setInterval(function(){
-			
+		setInterval(function(){			
 			// focus on the bottom of the page
-			window.scrollTo(0, document.body.scrollHeight);
+			// window.scrollTo(0, document.body.scrollHeight);
 			
 			$.ajax({
 				url: 'datas/total_email.php',
 				type: 'GET',
 				success: function(data) {
 					var total_email = data;
-					$('#total_email').html('total email found: ' + total_email);
+					$('#total_email').html(total_email);
 				}
 			});
 			
@@ -81,7 +105,7 @@
 				type: 'GET',
 				success: function(data) {
 					var total_url = data;
-					$('#total_url').html('total url stored: ' + total_url);
+					$('#total_url').html(total_url);
 					
 					$.ajax({
 						url: 'datas/visited_url.php',
@@ -89,8 +113,8 @@
 						success: function(data) {
 							var visited_url = data;
 							var not_visited_url = total_url - visited_url;
-							$('#visited_url').html('visited url: ' + visited_url);
-							$('#not_visited_url').html('not visited url: ' + not_visited_url);
+							$('#visited_url').html(visited_url);
+							$('#not_visited_url').html(not_visited_url);
 							
 							/* Progress bar for urls */
 							var visited_url_percent     = visited_url / total_url * 100;
@@ -111,8 +135,8 @@
 						success: function(data) {
 							var crawled_for_email_url = data;
 							var not_crawled_for_email_url = total_url - crawled_for_email_url;
-							$('#crawled_for_email_url').html('url crawled for emails: ' + crawled_for_email_url);
-							$('#not_crawled_for_email_url').html('url not crawled for emails: ' + not_crawled_for_email_url);
+							$('#crawled_for_email_url').html(crawled_for_email_url);
+							$('#not_crawled_for_email_url').html(not_crawled_for_email_url);
 							
 							/* Progress bar for crawled for email url */
 							var crawled_for_email_url_percent     = crawled_for_email_url / total_url * 100;
@@ -122,11 +146,9 @@
 							$('#progress_crawled_for_email_url').css('width', crawled_for_email_url_percent + '%');
 							$('#progress_non_crawled_for_email_url').css('width', not_crawled_for_email_url_percent + '%');
 							$('#crawled_for_email_url_percent').html(crawled_for_email_url_percent + '% crawled for email');
-							$('#not_crawled_for_email_url_percent').html(not_crawled_for_email_url_percent + '% not crawled for email');
-							
+							$('#not_crawled_for_email_url_percent').html(not_crawled_for_email_url_percent + '% not crawled for email');							
 						}
-					});
-					
+					});					
 				}
 			});
 			
@@ -134,7 +156,7 @@
 				url: 'datas/system_load.php',
 				type: 'GET',
 				success: function(data) {
-					$('#system_load').html('system load: ' + data);
+					$('#system_load').html(data + '%');
 				}
 			});
 			
