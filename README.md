@@ -30,8 +30,8 @@ CREATE TABLE `urls` (
 ```
 ## Usage
 1. Navigate to index.php
-2. Enter an url on the form input and click to fire the form. The crawler will scan all url on this page and put them in the database.
-The crawler will then visite all unvisited url that are in the database, and do the same search for other urls.
+2. Enter an url on the form input and click on Submit to fire the form. The crawler will scan all urls on this page and put them in the database.
+The crawler will then visit all unvisited urls that are in the database, and do the same search for other urls.
 3. Navigate to emails.php. The crawler will now start to search for email addresses in urls that are in the database.
 4. If you want a list of all the emails, just export your database table 'emails', and do whatever you want with it.
 
