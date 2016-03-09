@@ -61,3 +61,9 @@ If you are running the crawler on a MAMP server, edit `config/database.php` and 
 - write js tests
 - Crawl for other things than emails
 - ...
+
+
+## Screenshots
+![](https://cloud.githubusercontent.com/assets/5358048/13635825/9a75ec3c-e5fe-11e5-84b8-f4d42973bbda.png)
+
+![](https://cloud.githubusercontent.com/assets/5358048/13635826/9a76ebfa-e5fe-11e5-9bc8-5e770cccfd7a.png)
