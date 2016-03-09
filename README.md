@@ -39,20 +39,20 @@ php artisan crawler:build
 ## Troubleshooting
 If you are running the crawler on a MAMP server, edit `config/database.php` and add a unix socket conf:
 ```php
-    'mysql' => [
-        'driver'    => 'mysql',
-        'host'      => env('DB_HOST', 'localhost'),
-        'database'  => env('DB_DATABASE', 'forge'),
-        'username'  => env('DB_USERNAME', 'forge'),
-        'password'  => env('DB_PASSWORD', ''),
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-        'strict'    => false,
-        'engine'    => null,
-        
-        'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock', // add this line
-    ],
+'mysql' => [
+    'driver'    => 'mysql',
+    'host'      => env('DB_HOST', 'localhost'),
+    'database'  => env('DB_DATABASE', 'forge'),
+    'username'  => env('DB_USERNAME', 'forge'),
+    'password'  => env('DB_PASSWORD', ''),
+    'charset'   => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix'    => '',
+    'strict'    => false,
+    'engine'    => null,
+    
+    'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock', // add this line
+],
 ```
 
 
