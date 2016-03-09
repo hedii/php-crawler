@@ -37,6 +37,12 @@ php artisan crawler:build
 - Download the found resources
 
 ## Troubleshooting
+
+#### Blank space in path
+On some systems, if there is any blank space in the path to the crawler public directory, the crawler app won't work.
+Remove any space in folders that are part of the crawler path.
+
+#### MAMP server
 If you are running the crawler on a MAMP server, edit `config/database.php` and add a unix socket conf:
 ```php
 'mysql' => [
