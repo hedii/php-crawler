@@ -98,4 +98,51 @@ class SearchController extends ApiController
 
         return $this->errorWrongArgs($validator->errors()->first());
     }
+
+    /**
+     * Remove the specified user's search.
+     *
+     * @param  int $userId
+     * @param  int $searchId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($userId, $searchId)
+    {
+        User::find($userId)
+            ->searches()
+            ->find($searchId)
+            ->update(['finished' => true]);
+
+        // give the crawler the time to finish the current crawled page
+        sleep(1);
+
+        User::find($userId)
+            ->searches()
+            ->find($searchId)
+            ->delete();
+
+        return $this->respondWithCreated('The search has been deleted.');
+    }
+
+    /**
+     * Remove all the user's searches.
+     *
+     * @param  int $userId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroyAll($userId)
+    {
+        User::find($userId)
+            ->searches()
+            ->update(['finished' => true]);
+
+        // give the crawler the time to finish the current crawled page
+        sleep(1);
+
+        User::find($userId)
+            ->searches()
+            ->delete();
+
+        return $this->respondWithCreated('All searches have been deleted.');
+    }
 }

@@ -69,7 +69,7 @@
             },
             deleteSearch: function (searchId) {
                 if (confirm('Are you shure you want to delete this search?')) {
-                    this.$http.post(baseUrl + '/searches/' + searchId, {_method: 'DELETE'}).then(function () {
+                    this.$http.delete(apiUrl + '/users/' + userId + '/searches/' + searchId).then(function () {
                         this.getUserSearches();
                     }, function (response) {
                         console.log(response);

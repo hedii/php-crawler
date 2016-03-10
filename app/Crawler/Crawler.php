@@ -56,7 +56,7 @@ class Crawler
             $this->crawl($url);
 
             // check if the search has been deleted during the crawl process
-            if ($this->searchHasBeenDeleted()) {
+            if ($this->searchIsDeletedOrFinished()) {
                 return false;
             }
         }
@@ -152,13 +152,19 @@ class Crawler
     }
 
     /**
-     * Check if the search has been deleted in the database.
+     * Check if the search has been deleted or marked as finished.
      *
      * @return bool
      */
-    protected function searchHasBeenDeleted()
+    protected function searchIsDeletedOrFinished()
     {
-        return Search::find($this->search->id)->count() == 0;
+        $search = Search::find($this->search->id)->first();
+
+        if ($search && $search->finished != true) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

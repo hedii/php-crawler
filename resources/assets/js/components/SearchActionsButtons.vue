@@ -24,7 +24,7 @@
         methods: {
             deleteAllSearches: function () {
                 if (confirm('Are you shure you want to delete all your searches?')) {
-                    this.$http.post(baseUrl + '/searches', {_method: 'DELETE'}).then(function () {
+                    this.$http.delete(apiUrl + '/users/' + userId + '/searches').then(function () {
                         this.$parent.getUserSearches();
                     }, function (response) {
                         console.log(response);
