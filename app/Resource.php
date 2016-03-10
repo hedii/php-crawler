@@ -14,6 +14,13 @@ class Resource extends Model
     protected $table = 'resources';
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Get the user that owns the resource.
      */
     public function user()

@@ -13,7 +13,6 @@ class ResourceTransformer extends TransformerAbstract
             'id' => (int) $resource->id,
             'name' => $resource->name,
             'type' => $resource->type,
-            'created_at' => (string) $resource->created_at,
             'links' => [
                 'self' => url('api/users/' . $resource->user_id . '/searches/' . $resource->search_id . '/resources/' . $resource->id),
             ],

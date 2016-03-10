@@ -14,6 +14,13 @@ class Url extends Model
     protected $table = 'urls';
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Get the user that owns the url.
      */
     public function user()
