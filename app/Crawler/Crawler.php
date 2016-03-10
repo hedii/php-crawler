@@ -2,9 +2,7 @@
 
 namespace App\Crawler;
 
-use App\Url;
 use App\Search;
-use App\Resource;
 use Hedii\Extractors\Extractor;
 
 class Crawler
@@ -80,6 +78,7 @@ class Crawler
      */
     protected function crawl()
     {
+        // crawl search's entrypoint url
         $resources = $this->extractor->searchFor(['urls', 'emails'])
             ->at($this->search->entrypoint)
             ->get();
@@ -88,15 +87,14 @@ class Crawler
         $this->storeEmails($resources['emails']);
 
         // crawl all search's url
-        while ($this->searchHasNotCrawledUrl()) {
-            $url = $this->getNextNotCrawledUrl();
+        while ($url = $this->getNextNotCrawledUrl()) {
             $resources = $this->extractor->searchFor(['urls', 'emails'])
                 ->at($url->name)
                 ->get();
 
             $this->storeUrls($resources['urls']);
             $this->storeEmails($resources['emails']);
-            $this->markAsCrawled($url);
+            $url->update(['crawled' => true]);
 
             // check if search has been deleted
             if ($this->searchHasBeenDeleted()) {
@@ -105,7 +103,7 @@ class Crawler
         }
 
         // this search is finished!
-        $this->markAsFinished($this->search);
+        $this->search->update(['finished' => true]);
 
         return false;
     }
@@ -157,46 +155,15 @@ class Crawler
                     continue;
                 }
 
-                $resource = new Resource();
-                $resource->type = $this->search->type;
-                $resource->name = $email;
-                $resource->user_id = $this->search->user_id;
-                $resource->search_id = $this->search->id;
-
-                if (!$this->searchHasEmail($email)) {
-                    $this->search->resources()->save($resource);
-                }
+                $this->search->resources()->firstOrCreate([
+                    'type' => $this->search->type,
+                    'name' => $email,
+                    'user_id' => $this->search->user_id
+                ]);
             }
         }
 
         return $this;
-    }
-
-    /**
-     * Check if the search already has this url.
-     *
-     * @param string $url
-     * @return bool
-     */
-    protected function searchHasUrl($url)
-    {
-        return $this->search->urls()
-            ->where(['name' => $url])
-            ->first();
-    }
-
-    /**
-     * Check if the search already has this email.
-     *
-     * @param string $email
-     * @return bool
-     */
-    protected function searchHasEmail($email)
-    {
-        return $this->search->resources()->where([
-            'type' => $this->search->type,
-            'name' => $email
-        ])->first();
     }
 
     /**
@@ -210,52 +177,15 @@ class Crawler
     }
 
     /**
-     * Check if the search still has urls that have not been
-     * crawled yet.
-     *
-     * @return bool
-     */
-    protected function searchHasNotCrawledUrl()
-    {
-        return $this->search->urls()->where(['crawled' => false])->first();
-    }
-
-    /**
      * Get the search's url that has not been crawled yet.
      *
      * @return mixed
      */
     protected function getNextNotCrawledUrl()
     {
-        return $this->search->urls()->where(['crawled' => false])->first();
-    }
-
-    /**
-     * Update the url in the database: mark it as crawled for url.
-     *
-     * @param \App\Url $url
-     * @return $this
-     */
-    protected function markAsCrawled(Url $url)
-    {
-        $url->crawled = true;
-        $url->save();
-
-        return $this;
-    }
-
-    /**
-     * Update the search in the database: mark it as finished.
-     *
-     * @param \App\Search $search
-     * @return $this
-     */
-    protected function markAsFinished(Search $search)
-    {
-        $search->finished = true;
-        $search->save();
-
-        return $this;
+        return $this->search->urls()
+            ->where(['crawled' => false])
+            ->first();
     }
 
     /**
