@@ -58,29 +58,44 @@ class Crawler
             $this->domainName = $this->getDomainName($this->search->entrypoint);
             $this->domainLimit = (bool) $this->search->domain_limit;
 
-            return $this->crawl();
+            // crawl search's entrypoint url
+            $this->crawl($this->search->entrypoint, true);
+
+            // crawl all search's urls
+            while ($url = $this->getNextNotCrawledUrl()) {
+                $this->crawl($url);
+
+                // check if the search has been deleted during the crawl process
+                if ($this->searchHasBeenDeleted()) {
+                    return false;
+                }
+            }
+
+            // this search is finished!
+            $this->search->update(['finished' => true]);
+
+            return false;
         }
 
         return false;
     }
 
     /**
-     * All the logic for this class.
+     * Crawl an url and extract resources.
      *
-     * @return bool
+     * @param mixed $url
+     * @param bool $entrypoint
      */
-    protected function crawl()
+    protected function crawl($url, $entrypoint = false)
     {
-        // crawl search's entrypoint url
-        $resources = $this->extractor->searchFor(['urls', 'emails'])
-            ->at($this->search->entrypoint)
-            ->get();
+        if ($entrypoint) {
+            $resources = $this->extractor->searchFor(['urls', 'emails'])
+                ->at($url)
+                ->get();
 
-        $this->storeUrls($resources['urls']);
-        $this->storeEmails($resources['emails']);
-
-        // crawl all search's url
-        while ($url = $this->getNextNotCrawledUrl()) {
+            $this->storeUrls($resources['urls']);
+            $this->storeEmails($resources['emails']);
+        } else {
             $resources = $this->extractor->searchFor(['urls', 'emails'])
                 ->at($url->name)
                 ->get();
@@ -88,17 +103,7 @@ class Crawler
             $this->storeUrls($resources['urls']);
             $this->storeEmails($resources['emails']);
             $url->update(['crawled' => true]);
-
-            // check if search has been deleted
-            if ($this->searchHasBeenDeleted()) {
-                return false;
-            }
         }
-
-        // this search is finished!
-        $this->search->update(['finished' => true]);
-
-        return false;
     }
 
     /**
