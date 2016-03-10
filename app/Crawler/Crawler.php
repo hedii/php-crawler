@@ -22,13 +22,6 @@ class Crawler
     protected $domainName;
 
     /**
-     * Whether or not the search has to be limited to a domain name.
-     *
-     * @var bool
-     */
-    protected $domainLimit;
-
-    /**
      * @var \Hedii\Extractors\Extractor
      */
     protected $extractor;
@@ -53,29 +46,23 @@ class Crawler
     public function run(Search $search)
     {
         $this->search = $search;
+        $this->domainName = $this->getDomainName($this->search->entrypoint);
 
-        if (!$this->searchHasBeenDeleted()) {
-            $this->domainName = $this->getDomainName($this->search->entrypoint);
-            $this->domainLimit = (bool) $this->search->domain_limit;
+        // crawl search's entrypoint url
+        $this->crawl($this->search->entrypoint, true);
 
-            // crawl search's entrypoint url
-            $this->crawl($this->search->entrypoint, true);
+        // crawl all search's urls
+        while ($url = $this->getNextNotCrawledUrl()) {
+            $this->crawl($url);
 
-            // crawl all search's urls
-            while ($url = $this->getNextNotCrawledUrl()) {
-                $this->crawl($url);
-
-                // check if the search has been deleted during the crawl process
-                if ($this->searchHasBeenDeleted()) {
-                    return false;
-                }
+            // check if the search has been deleted during the crawl process
+            if ($this->searchHasBeenDeleted()) {
+                return false;
             }
-
-            // this search is finished!
-            $this->search->update(['finished' => true]);
-
-            return false;
         }
+
+        // this search is finished!
+        $this->search->update(['finished' => true]);
 
         return false;
     }
@@ -122,7 +109,7 @@ class Crawler
                     // if url is not a valid url, continue
                     (!$this->isValidUrl($url)) ||
                     // or, if domainLimit, get only the same domain urls
-                    ($this->domainLimit && ($this->getDomainName($url) !== $this->domainName)) ||
+                    ($this->search->domain_limit && ($this->getDomainName($url) !== $this->domainName)) ||
                     // we don't want media files like images
                     $this->isMediaFile($url)
                 ) {
