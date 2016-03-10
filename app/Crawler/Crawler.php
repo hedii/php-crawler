@@ -15,13 +15,6 @@ class Crawler
     protected $search;
 
     /**
-     * The Eloquent model for the search entry point url.
-     *
-     * @var \App\Url
-     */
-    protected $entryPoint;
-
-    /**
      * The search's domain name.
      *
      * @var string
