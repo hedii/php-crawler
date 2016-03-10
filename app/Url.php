@@ -21,6 +21,13 @@ class Url extends Model
     public $timestamps = false;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'crawled', 'user_id', 'search_id'];
+
+    /**
      * Get the user that owns the url.
      */
     public function user()

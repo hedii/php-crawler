@@ -18,7 +18,7 @@ class Search extends Model
      *
      * @var array
      */
-    protected $fillable = ['entrypoint'];
+    protected $fillable = ['type', 'entrypoint', 'user_id', 'domain_limit', 'finished'];
 
     /**
      * Get the user that owns the search.
