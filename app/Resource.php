@@ -14,6 +14,20 @@ class Resource extends Model
     protected $table = 'resources';
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'type', 'user_id', 'search_id'];
+
+    /**
      * Get the user that owns the resource.
      */
     public function user()

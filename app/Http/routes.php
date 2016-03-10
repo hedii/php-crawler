@@ -48,6 +48,8 @@ Route::group([
     Route::get('users/{user_id}/searches', 'SearchController@index');
     Route::get('users/{user_id}/searches/{search_id}', 'SearchController@show');
     Route::patch('users/{user_id}/searches/{search_id}', 'SearchController@update');
+    Route::delete('users/{user_id}/searches', 'SearchController@destroyAll');
+    Route::delete('users/{user_id}/searches/{search_id}', 'SearchController@destroy');
 
     // user's searches's urls
     Route::get('users/{user_id}/searches/{search_id}/urls', 'UrlController@index');

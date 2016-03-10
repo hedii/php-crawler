@@ -18,7 +18,6 @@ class CreateUrlsTable extends Migration
             $table->boolean('crawled')->default(null);
             $table->integer('user_id')->unsigned()->index();
             $table->integer('search_id')->unsigned()->index();
-            $table->timestamps();
         });
     }
 

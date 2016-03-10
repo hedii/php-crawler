@@ -48,8 +48,8 @@ class SearchTransformer extends TransformerAbstract
 
     private function getUrlsStats(Search $search)
     {
-        $urlTotal = $this->countTotalUrls($search);
-        $urlCrawled = $this->countCrawledUrls($search);
+        $urlTotal = $search->urlsCount;
+        $urlCrawled = $search->crawledUrlsCount;
         if ($urlTotal > 0) {
             $urlPercentCrawled = round(($urlCrawled / $urlTotal) * 100);
         } else {
@@ -68,17 +68,7 @@ class SearchTransformer extends TransformerAbstract
     private function getResourcesStats(Search $search)
     {
         return [
-            'total' => $search->resources()->count()
+            'total' => $search->resourcesCount
         ];
-    }
-
-    private function countTotalUrls(Search $search)
-    {
-        return $search->urls()->count();
-    }
-
-    private function countCrawledUrls(Search $search)
-    {
-        return $search->urls()->where(['crawled' => true])->count();
     }
 }

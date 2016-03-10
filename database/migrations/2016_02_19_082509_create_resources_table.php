@@ -18,7 +18,6 @@ class CreateResourcesTable extends Migration
             $table->string('type', 255);
             $table->integer('user_id')->unsigned()->index();
             $table->integer('search_id')->unsigned()->index();
-            $table->timestamps();
         });
     }
 
