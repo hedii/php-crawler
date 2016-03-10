@@ -68,7 +68,7 @@ class SearchTransformer extends TransformerAbstract
     private function getResourcesStats(Search $search)
     {
         return [
-            'total' => $search->resources()->count()
+            'total' => $search->resourcesCount
         ];
     }
 }

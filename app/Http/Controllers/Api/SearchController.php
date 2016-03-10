@@ -20,7 +20,7 @@ class SearchController extends ApiController
     {
         $searches = User::find($userId)
             ->searches()
-            ->with(['urlsCount', 'crawledUrlsCount'])
+            ->with(['urlsCount', 'crawledUrlsCount', 'resourcesCount'])
             ->get();
 
         return $this->respondWithCollection($searches, new SearchTransformer(), 'searches');
@@ -37,7 +37,7 @@ class SearchController extends ApiController
     {
         $search = User::find($userId)
             ->searches()
-            ->with(['urlsCount', 'crawledUrlsCount'])
+            ->with(['urlsCount', 'crawledUrlsCount', 'resourcesCount'])
             ->find($searchId);
 
         if ($search) {

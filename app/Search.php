@@ -61,6 +61,27 @@ class Search extends Model
     }
 
     /**
+     * @return mixed
+     */
+    public function crawledUrlsCount()
+    {
+        return $this->hasOne(Url::class)
+            ->selectRaw('search_id, count(*) as aggregate')
+            ->where(['crawled' => true])
+            ->groupBy('search_id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function resourcesCount()
+    {
+        return $this->hasOne(Resource::class)
+            ->selectRaw('search_id, count(*) as aggregate')
+            ->groupBy('search_id');
+    }
+
+    /**
      * Count the search total number of urls.
      *
      * @return int
@@ -77,17 +98,6 @@ class Search extends Model
     }
 
     /**
-     * @return mixed
-     */
-    public function crawledUrlsCount()
-    {
-        return $this->hasOne(Url::class)
-            ->selectRaw('search_id, count(*) as aggregate')
-            ->where(['crawled' => true])
-            ->groupBy('search_id');
-    }
-
-    /**
      * Count the search number of crawled urls.
      *
      * @return int
@@ -99,6 +109,22 @@ class Search extends Model
         }
 
         $related = $this->getRelation('crawledUrlsCount');
+
+        return ($related) ? (int) $related->aggregate : 0;
+    }
+
+    /**
+     * Count the search number of resources.
+     *
+     * @return int
+     */
+    public function getResourcesCountAttribute()
+    {
+        if (!$this->relationLoaded('resourcesCount')) {
+            $this->load('resourcesCount');
+        }
+
+        $related = $this->getRelation('resourcesCount');
 
         return ($related) ? (int) $related->aggregate : 0;
     }
