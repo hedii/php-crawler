@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-Use App\Search;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Transformers\SearchTransformer;
@@ -18,14 +18,13 @@ class SearchController extends ApiController
      */
     public function index($userId)
     {
-        $searches = Search::where(['user_id' => $userId])->get();
+        $searches = User::find($userId)->searches;
 
         return $this->respondWithCollection($searches, new SearchTransformer(), 'searches');
     }
 
     /**
-     * Get one user's search. The user id parameter is required
-     * because it is part of the api endpoint url.
+     * Get one user's search.
      *
      * @param int $userId
      * @param int $searchId
@@ -33,7 +32,10 @@ class SearchController extends ApiController
      */
     public function show($userId, $searchId)
     {
-        $search = Search::find($searchId);
+        $search = User::find($userId)
+            ->searches()
+            ->with(['urlsCount', 'crawledUrlsCount'])
+            ->find($searchId);
 
         if ($search) {
             return $this->respondWithItem($search, new SearchTransformer(), 'searches');
@@ -56,10 +58,9 @@ class SearchController extends ApiController
         ]);
 
         if (!$validator->fails()) {
-            $search = new Search();
-            $search->entrypoint = $request->entrypoint;
-            $search->type = $request->type;
-            Auth::user()->searches()->save($search);
+            $search = User::find(Auth::user()->id)
+                ->searches()
+                ->create($request->all());
 
             exec('cd ' . base_path() . ' && php artisan crawler:crawl ' . $search->id . ' > /dev/null &');
 
@@ -70,9 +71,7 @@ class SearchController extends ApiController
     }
 
     /**
-     * Update a user's search: mark it as finished. The user id
-     * parameter is required because it is part of the api
-     * endpoint url.
+     * Update a user's search: mark it as finished.
      *
      * @param \Illuminate\Http\Request $request
      * @param int $userId
@@ -86,9 +85,10 @@ class SearchController extends ApiController
         ]);
 
         if (!$validator->fails()) {
-            $search = Search::find($searchId);
-            $search->finished = $request->input('finished');
-            $search->save();
+            User::find($userId)
+                ->searches()
+                ->find($searchId)
+                ->update(['finished' => $request->input('finished')]);
 
             return $this->respondWithCreated('The search has been stopped.');
         }

@@ -32,7 +32,6 @@ class SearchController extends Controller
     public function index()
     {
         return response()->view('searches.index', [
-            //'searches' => $this->user->searches,
             'searches' => $this->user->searches
         ]);
     }
