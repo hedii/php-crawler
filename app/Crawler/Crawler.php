@@ -133,14 +133,10 @@ class Crawler
                     continue;
                 }
 
-                $theUrl = new Url();
-                $theUrl->name = $url;
-                $theUrl->crawled = false;
-                $theUrl->user_id = $this->search->user_id;
-
-                if (!$this->searchHasUrl($url)) {
-                    $this->search->urls()->save($theUrl);
-                }
+                $this->search->urls()->firstOrCreate([
+                    'name' => $url,
+                    'user_id' => $this->search->user_id
+                ]);
             }
         }
 
@@ -296,14 +292,21 @@ class Crawler
     }
 
     /**
-     * Remove unwanted character at the end of the url string.
+     * Remove unwanted character at the end of the url string,
+     * and remove anchors in the url.
      *
      * @param string $url
      * @return string
      */
     protected function cleanUrl($url)
     {
-        return rtrim(rtrim($url, '#'), '/');
+        $url = rtrim(rtrim($url, '#'), '/');
+
+        if (!empty(parse_url($url, PHP_URL_FRAGMENT))) {
+            $url = str_replace('#' . parse_url($url, PHP_URL_FRAGMENT), '', $url);
+        }
+
+        return rtrim($url, '?');
     }
 
     /**
