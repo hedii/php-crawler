@@ -18,7 +18,10 @@ class SearchController extends ApiController
      */
     public function index($userId)
     {
-        $searches = User::find($userId)->searches;
+        $searches = User::find($userId)
+            ->searches()
+            ->with(['urlsCount', 'crawledUrlsCount'])
+            ->get();
 
         return $this->respondWithCollection($searches, new SearchTransformer(), 'searches');
     }
