@@ -5,7 +5,7 @@ The emails are downloadable in a text file at any time.
 Several users can start searching for emails without viewing the other users' searches (searches are related to a user).
 
 ## Installation
-- Create a mysql database (default name: `php-crawler`)
+- Create a mysql database (default name: `php_crawler`)
 - Install the repo with [composer](https://getcomposer.org/):
 ```bash
 composer create-project hedii/php-crawler php-crawler
@@ -18,7 +18,7 @@ npm install
 - Open the `.env` file, check the database credentials, and modify it if needed:
 ```
 DB_HOST=127.0.0.1
-DB_DATABASE=php-crawler
+DB_DATABASE=php_crawler
 DB_USERNAME=root
 DB_PASSWORD=root
 ```
