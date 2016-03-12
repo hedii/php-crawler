@@ -1,32 +1,32 @@
 <template>
     <search-actions-buttons></search-actions-buttons>
     <hr>
-    <table class="table table-hover">
+    <table class="table table-hover table-condensed">
         <thead>
-        <tr>
-            <th>Type</th>
-            <th>Entry point</th>
-            <th>Started</th>
-            <th>Status</th>
-            <th>Urls</th>
-            <th>Found</th>
-            <th>Actions</th>
-        </tr>
+            <tr>
+                <th class="hidden-xs">Type</th>
+                <th>Entry point</th>
+                <th class="hidden-xs">Started</th>
+                <th>Status</th>
+                <th class="hidden-xs">Urls</th>
+                <th class="hidden-xs">Found</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
-        <tr v-for="search in searches | orderBy 'created_at' -1">
-            <td>{{ search.resource_type | capitalize }}</td>
-            <td>{{ search.entrypoint_url }}</td>
-            <td>{{ search.created_at | timeAgo }}</td>
-            <td>{{{ search.finished | searchStatus }}}</td>
-            <td>{{ search.related.urls.data.total | formatInteger }}</td>
-            <td>{{ search.related.resources.data.total | formatInteger }}</td>
-            <td>
-                <a v-bind:href="viewSearchUrl(search.id)" class="btn btn-xs btn-primary" title="View search"><i class="fa fa-arrow-right"></i></a>
-                <a v-bind:href="downloadSearchResourcesUrl(search.id)" class="btn btn-xs btn-success" title="Download {{ search.resource_type }}s"><i class="fa fa-download"></i></a>
-                <a v-on:click.stop="deleteSearch(search.id)" class="btn btn-xs btn-danger" title="Delete search"><i class="fa fa-trash"></i></a>
-            </td>
-        </tr>
+            <tr v-for="search in searches | orderBy 'created_at' -1">
+                <td class="hidden-xs">{{ search.resource_type | capitalize }}</td>
+                <td>{{ search.entrypoint_url }}</td>
+                <td class="hidden-xs">{{ search.created_at | timeAgo }}</td>
+                <td>{{{ search.finished | searchStatus }}}</td>
+                <td class="hidden-xs">{{ search.related.urls.data.total | formatInteger }}</td>
+                <td class="hidden-xs">{{ search.related.resources.data.total | formatInteger }}</td>
+                <td>
+                    <a v-bind:href="viewSearchUrl(search.id)" class="btn btn-action btn-xs btn-primary" title="View search"><i class="fa fa-arrow-right"></i></a>
+                    <a v-bind:href="downloadSearchResourcesUrl(search.id)" class="btn btn-action btn-xs btn-success" title="Download {{ search.resource_type }}s"><i class="fa fa-download"></i></a>
+                    <a v-on:click.stop="deleteSearch(search.id)" class="btn btn-action btn-xs btn-danger" title="Delete search"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </template>
@@ -98,5 +98,9 @@
 </script>
 
 <style>
-
+    @media screen and (max-width: 991px) {
+        .btn-action {
+            margin-bottom: 3px;
+        }
+    }
 </style>

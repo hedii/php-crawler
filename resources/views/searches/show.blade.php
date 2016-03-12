@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-10 col-md-offset-1">
+            <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Search for {{ $search->type }}s with entry point <a href="{{ $search->entrypoint }}" target="_blank">{{ str_limit($search->entrypoint, 50) }}</a></div>
 

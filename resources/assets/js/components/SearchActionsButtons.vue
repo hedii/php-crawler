@@ -1,7 +1,7 @@
 <template>
-    <a v-bind:href="createSearchUrl" class="btn btn-primary"><i class="fa fa-btn fa-plus"></i> Start a new search</a>
-    <a v-if="countSearches" v-bind:href="downloadResourcesUrl" class="btn btn-success"><i class="fa fa-btn fa-btn fa-download"></i> Download all resources</a>
-    <a v-if="countSearches" v-on:click.stop="deleteAllSearches" class="btn btn-danger"><i class="fa fa-btn fa-btn fa-trash"></i> Delete all searches</a>
+    <a v-bind:href="createSearchUrl" class="btn btn-action btn-primary"><i class="fa fa-btn fa-plus"></i> Start a new search</a>
+    <a v-if="countSearches" v-bind:href="downloadResourcesUrl" class="btn btn-action btn-success"><i class="fa fa-btn fa-btn fa-download"></i> Download all resources</a>
+    <a v-if="countSearches" v-on:click.stop="deleteAllSearches" class="btn btn-action btn-danger"><i class="fa fa-btn fa-btn fa-trash"></i> Delete all searches</a>
 </template>
 
 <script>
