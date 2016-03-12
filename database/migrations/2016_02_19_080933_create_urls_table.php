@@ -14,8 +14,8 @@ class CreateUrlsTable extends Migration
     {
         Schema::create('urls', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 1000);
-            $table->boolean('crawled')->default(null);
+            $table->string('name', 255)->index();
+            $table->boolean('crawled')->default(false);
             $table->integer('user_id')->unsigned()->index();
             $table->integer('search_id')->unsigned()->index();
         });
