@@ -18,7 +18,7 @@ npm install
 - Open the `.env` file, check the database credentials, and modify it if needed:
 ```
 DB_HOST=127.0.0.1
-DB_DATABASE=php_crawler
+DB_DATABASE=php-crawler
 DB_USERNAME=root
 DB_PASSWORD=root
 ```
