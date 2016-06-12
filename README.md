@@ -38,6 +38,15 @@ php artisan crawler:build
 
 ## Troubleshooting
 
+#### Server requirements
+- Curl
+- PHP >= 5.5.9
+- Curl PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Mbstring PHP Extension
+- Tokenizer PHP Extension
+
 #### Blank space in path
 On some systems, if there is any blank space in the path to the crawler public directory, the crawler app won't work.
 Remove any space in folders that are part of the crawler path.
