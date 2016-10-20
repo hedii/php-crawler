@@ -175,7 +175,7 @@ class Crawler
     protected function getNextNotCrawledUrl()
     {
         return $this->search->urls()
-            ->where(['crawled' => false])
+            ->where('crawled', '0')
             ->first();
     }
 
