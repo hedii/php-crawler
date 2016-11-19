@@ -29,6 +29,13 @@ php artisan crawler:build
 - Point your webserver to the public directory: `php-crawler/public`
 - Done
 
+On Apache you need to set the
+``` apache
+DocumentRoot /var/www/html/php-crawler/public
+``` 
+If you have trouble or getting 404 error, point directly to the index document.
+Ex: http://localhost/index.php
+
 ## Usage
 - Navigate to your php-crawler website
 - Register a new account
