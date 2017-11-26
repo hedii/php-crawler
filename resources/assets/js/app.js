@@ -1,46 +1,22 @@
-var moment = require('moment');
-var Vue = require('vue');
-var Resource = require('vue-resource');
-Vue.use(Resource);
-Vue.config.debug = true;
-Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-import SearchIndex from './components/SearchIndex.vue';
-import SearchCreate from './components/SearchCreate.vue';
-import SearchShow from './components/SearchShow.vue';
-import SearchActionsButtons from './components/SearchActionsButtons.vue';
+/**
+ * First we will load all of this project's JavaScript dependencies which
+ * includes Vue and other libraries. It is a great starting point when
+ * building robust, powerful web applications using Vue and Laravel.
+ */
 
-if (
-    document.body.classList.contains('searches-index') ||
-    document.body.classList.contains('searches-show') ||
-    document.body.classList.contains('searches-create')
-) {
+require('./bootstrap');
 
-    Vue.filter('searchStatus', function (value) {
-        if (value === false) {
-            return '<i class="fa fa-spinner fa-spin"></i><span class="hidden-xs"> Running</span>';
-        }
+window.Vue = require('vue');
 
-        return '<i class="fa fa-check"></i><span class="hidden-xs"> Finished</span>';
-    });
+/**
+ * Next, we will create a fresh Vue application instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
 
-    Vue.filter('formatInteger', function (value) {
-        return value.toLocaleString();
-    });
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
-    Vue.filter('timeAgo', function (value) {
-        return moment(value).fromNow();
-    });
-
-    new Vue({
-        el: '#app',
-        data: {},
-        methods: {},
-        components: {
-            SearchIndex,
-            SearchCreate,
-            SearchShow
-        }
-    });
-
-}
+const app = new Vue({
+    el: '#app'
+});

@@ -2,16 +2,12 @@
 
 namespace App;
 
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'users';
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -23,35 +19,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes excluded from the model's JSON form.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    /**
-     * Get the searches for user.
-     */
-    public function searches()
-    {
-        return $this->hasMany(Search::class);
-    }
-
-    /**
-     * Get the urls for user.
-     */
-    public function urls()
-    {
-        return $this->hasMany(Url::class);
-    }
-
-    /**
-     * Get the resources for user.
-     */
-    public function resources()
-    {
-        return $this->hasMany(Resource::class);
-    }
 }
