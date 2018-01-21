@@ -9,6 +9,16 @@ The emails are downloadable as a text file.
 
 Multiple users can start searching for emails without being able see the other users' searches (searches are related to a single user).
 
+## Screenshots
+
+![Screenshot1](https://user-images.githubusercontent.com/5358048/35198632-c9afcdf2-fef1-11e7-91ec-900b1ff25b62.png)
+
+![Screenshot2](https://user-images.githubusercontent.com/5358048/35198634-cddecb44-fef1-11e7-836b-5dbe16a1bb2a.png)
+
+![Screenshot3](https://user-images.githubusercontent.com/5358048/35198637-d015a180-fef1-11e7-93a0-9eb72e1c1281.png)
+
+![Screenshot4](https://user-images.githubusercontent.com/5358048/35198638-d20ea1a8-fef1-11e7-8ecf-df3cf2c4c8e1.png)
+
 ## Server requirements
 
 - PHP >= 7.2.0
