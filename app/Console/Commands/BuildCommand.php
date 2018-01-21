@@ -27,6 +27,20 @@ class BuildCommand extends Command
      */
     public function handle(): bool
     {
+        $this->comment('Running application migrations');
+
+        $returnCode = $this->call('migrate');
+
+        if ($returnCode !== 0) {
+            $this->error('Unable run the application migrations');
+
+            return false;
+        } else {
+            $this->info('Application migrations ok');
+            $this->line('---');
+        }
+
+
         $this->comment('Installing Laravel Passport');
 
         $returnCode = $this->callSilent('passport:install');
@@ -40,16 +54,16 @@ class BuildCommand extends Command
             $this->line('---');
         }
 
-        $this->comment('Running application migrations');
+        $this->comment('Running fresh application migrations');
 
         $returnCode = $this->call('migrate:fresh');
 
         if ($returnCode !== 0) {
-            $this->error('Unable run the application migrations');
+            $this->error('Unable run the fresh application migrations');
 
             return false;
         } else {
-            $this->info('Application migrations ok');
+            $this->info('Application fresh migrations ok');
             $this->line('---');
         }
 
