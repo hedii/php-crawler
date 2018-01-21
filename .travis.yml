@@ -7,6 +7,6 @@ sudo: false
 
 before-script:
   - travis_retry composer self-update
-  - composer create-project hedii/php-crawler --prefer-dist --no-interaction
+  - composer create-project hedii/php-crawler --no-interaction
 
 script: vendor/bin/phpunit
