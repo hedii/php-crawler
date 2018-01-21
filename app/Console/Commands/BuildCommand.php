@@ -53,19 +53,6 @@ class BuildCommand extends Command
             $this->line('---');
         }
 
-        $this->comment('Running fresh application migrations');
-
-        $returnCode = $this->call('migrate:fresh');
-
-        if ($returnCode !== 0) {
-            $this->error('Unable run the fresh application migrations');
-
-            return false;
-        } else {
-            $this->info('Application fresh migrations ok');
-            $this->line('---');
-        }
-
         $this->info('Crawler app ready!');
 
         return true;
