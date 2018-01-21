@@ -1,9 +1,11 @@
 # php-crawler
 
-A crawler application written with php and Laravel that finds email addresses on the internets.
+A crawler application with a php backend using Laravel, and a frontend unsing vuejs, that finds email addresses on the internets.
+
 Given an entry point url, the crawler will search for emails in all the urls available from this entry point domain name.
-The emails are downloadable in a text file at any time.
-Several users can start searching for emails without viewing the other users' searches (searches are related to a user).
+The emails are downloadable as a text file.
+
+Multiple users can start searching for emails without being able see the other users' searches (searches are related to a single user).
 
 ## Server requirements
 
@@ -31,11 +33,15 @@ DB_DATABASE=crawler
 DB_USERNAME=root
 DB_PASSWORD=your_password_here
 ```
+- In the `.env` file, set the application url:
+```
+APP_URL=http://crawler.localhost
+```
 - Build the crawler application
 ```bash
 php artisan crawler:build
 ```
-- Point your web server's document / web root to be the public directory: `/some/path/crawler/public`. The index.php in this directory serves as the front controller for all HTTP requests entering your application. [See Laravel documentation](https://laravel.com/docs/master/installation). If highly recommend using [Laravel Valet](https://laravel.com/docs/master/valet) if you are using a Mac. Otherwise, check [Laravel Homestead](https://laravel.com/docs/master/homestead)
+- Point your web server's document / web root to be the public directory: `/some/path/crawler/public`. The index.php in this directory serves as the front controller for all HTTP requests entering your application. [See Laravel documentation](https://laravel.com/docs/master/installation). I highly recommend using [Laravel Valet](https://laravel.com/docs/master/valet) if you are using a Mac. Otherwise, check [Laravel Homestead](https://laravel.com/docs/master/homestead).
 - Done
 
 ## Usage
