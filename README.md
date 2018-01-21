@@ -1,5 +1,7 @@
 # php-crawler
 
+[![Build Status](https://travis-ci.org/hedii/php-crawler.svg?branch=master)](https://travis-ci.org/hedii/php-crawler)
+
 A crawler application with a php backend using Laravel, and a js frontend using vuejs, that finds email addresses on the internets.
 
 Given an entry point url, the crawler will search for emails in all the urls available from this entry point domain name.
