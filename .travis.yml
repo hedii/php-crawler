@@ -1,8 +1,15 @@
 language: php
 php:
   - 7.2
-sudo: false
-before-script:
-  - travis_retry composer self-update
-install:
-  - composer create-project hedii/php-crawler . --no-interaction
+before_script:
+  - cp .env.travis .env
+  - composer self-update
+  - composer install --no-interaction
+  - php artisan key:generate
+  - php artisan crawler:build
+before_install:
+  - mysql -e 'CREATE DATABASE crawler;'
+script:
+  - vendor/bin/phpunit
+services:
+  - mysql
