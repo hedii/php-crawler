@@ -7,3 +7,5 @@ before_script:
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan crawler:build
+script:
+  - ./vendor/bin/phpunit
