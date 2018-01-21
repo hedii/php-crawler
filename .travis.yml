@@ -2,13 +2,11 @@ language: php
 php:
   - 7.2
 before_script:
-  - cp .env.travis .env
+  - cp .env.example .env
   - composer self-update
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan crawler:build
-before_install:
-  - mysql -e 'CREATE DATABASE crawler;'
 script:
   - vendor/bin/phpunit
 services:
