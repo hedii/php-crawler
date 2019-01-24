@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\App;
+use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
 class CrawlJob implements ShouldQueue
@@ -38,13 +39,14 @@ class CrawlJob implements ShouldQueue
     public function handle(): void
     {
         if (! App::environment('testing')) {
-            $basePath = base_path();
-            $process = new Process("cd {$basePath} && php artisan crawler:crawl {$this->search->id} > /dev/null 2>&1 &");
-            $process->start();
+            $php = (new PhpExecutableFinder())->find();
 
-            $pid = $process->getPid();
+            $process = Process::fromShellCommandline(
+                "{$php} artisan crawler:crawl {$this->search->id} > /dev/null 2>&1 &",
+                realpath(base_path())
+            );
 
-            $this->search->update(['pid' => $pid]);
+            $process->run();
         }
     }
 }
