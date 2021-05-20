@@ -1,5 +1,7 @@
 # php-crawler
 
+***This repository has not been updated since a long time and I am not using it anymore. Please feel free to fork it and do whatever you want with it.***
+
 [![Build Status](https://travis-ci.org/hedii/php-crawler.svg?branch=master)](https://travis-ci.org/hedii/php-crawler)
 
 A crawler application with a php backend using Laravel, and a js frontend using vuejs, that finds email addresses on the internets.
